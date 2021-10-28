@@ -20,5 +20,12 @@
   "homepage": "https://github.com/cresh-io/action-ghcr-batch-delete-versions#readme",
   "devDependencies": {
     "jest": "^27.3.1"
+  },
+  "bin": {
+    "clean-packages": "./src/entrypoints/cli.js"
+  },
+  "dependencies": {
+    "octokit": "^1.7.0",
+    "yargs": "^17.2.1"
   }
 }

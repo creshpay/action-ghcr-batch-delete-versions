@@ -10,7 +10,7 @@ Basic:
 
 ```yaml
 steps:
-* name: Clean GHCR packages
+- name: Clean GHCR packages
   uses: cresh-io/action-ghcr-batch-delete-versions@v1
   with:
     github-access-token: "${{ secrets.GITHUB_TOKEN }}"

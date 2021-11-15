@@ -1,0 +1,31 @@
+{
+  "name": "action-ghcr-batch-delete-versions",
+  "version": "1.0.0",
+  "description": "This action can delete batch of ghcr package versions",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest test",
+    "test:watch": "jest test --watch",
+    "test:cover": "jest test --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cresh-io/action-ghcr-batch-delete-versions.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cresh-io/action-ghcr-batch-delete-versions/issues"
+  },
+  "homepage": "https://github.com/cresh-io/action-ghcr-batch-delete-versions#readme",
+  "devDependencies": {
+    "jest": "^27.3.1"
+  },
+  "bin": {
+    "clean-packages": "./src/entrypoints/cli.js"
+  },
+  "dependencies": {
+    "octokit": "^1.7.0",
+    "yargs": "^17.2.1"
+  }
+}

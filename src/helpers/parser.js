@@ -1,11 +1,17 @@
+const { equal } = require('assert');
 const { EOL } = require('os');
 
 const Operation = require('./operation')
 
-const someStartsWith = (prefix) => (values) => values.some(value => value.startsWith(prefix))
-const someEquals = (search) => (values) => values.some(value => value === search)
-const someEndsWith = (suffix) => (values) => values.some(value => value.endsWith(suffix))
-const someContains = (search) => (values) => values.some(value => value.includes(search))
+const startsWith = (prefix) => (value) => value.startsWith(prefix)
+const isEqual = (search) => (value) => value === search
+const endsWith = (suffix) => (value) => value.endsWith(suffix)
+const contains = (search) => (value) => value.includes(search)
+
+const someStartsWith = (prefix) => (values) => values.some(startsWith(prefix))
+const someEquals = (search) => (values) => values.some(isEqual(search))
+const someEndsWith = (suffix) => (values) => values.some(endsWith(suffix))
+const someContains = (search) => (values) => values.some(contains(search))
 
 const arrayCountEquals = (count) => (arr) => arr.length === +count
 const arrayCountGreaterThan = (count) => (arr) => arr.length > +count
@@ -57,6 +63,13 @@ const mapTypeOperatorFunc = {
     olderThan: olderThan,
     youngerThan: youngerThan,
   },
+  name: {
+    [DEFAULT_OPERATOR]: isEqual,
+    startsWith: startsWith,
+    isEqual: isEqual,
+    endsWith: endsWith,
+    contains: contains,
+  },
 }
 
 const getValueOrDefault = (str, default_value) => str && str.split('=').length > 1 ? str.split('=')[1].trim() : default_value
@@ -101,6 +114,10 @@ const parseRulesFromString = (rules) => {
 module.exports = {
   parseRulesFromString: parseRulesFromString,
   parseLine: parseLine,
+  startsWith: startsWith,
+  isEqual: isEqual,
+  endsWith: endsWith,
+  contains: contains,
   someStartsWith: someStartsWith,
   someEquals: someEquals,
   someEndsWith: someEndsWith,

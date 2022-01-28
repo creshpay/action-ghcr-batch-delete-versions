@@ -25,6 +25,11 @@ inputs:
     required: true
     default: ${{ github.repository }}
 
+  package_type:
+    description: "Type of the package"
+    required: true
+    default: "container"
+
   github-access-token:
     description: "Github access token"
     required: true
@@ -46,6 +51,7 @@ runs:
         SELECTOR: "${{ inputs.selector }}"
         EXCLUDER: "${{ inputs.excluder }}"
         PACKAGE_NAME: "${{ inputs.package_name }}"
+        PACKAGE_TYPE: "${{ inputs.package_type }}"
       with:
         github-token: "${{ inputs.github-access-token }}"
         script: |

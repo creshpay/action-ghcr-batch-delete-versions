@@ -13,6 +13,8 @@ class Operation {
         return this.operator(this.value)(version.metadata.container.tags)
       case 'age':
         return this.operator(this.value)(version.updated_at)
+      case 'name':
+        return this.operator(this.value)(version.name)
     }
   }
 }

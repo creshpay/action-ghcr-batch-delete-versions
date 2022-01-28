@@ -1,6 +1,6 @@
 const Operation = require('./operation')
 const { finder } = require('./finder')
-const { someStartsWith, arrayCountGreaterThanOrEqual, olderThan, someEquals } = require('./parser')
+const { someStartsWith, arrayCountGreaterThanOrEqual, olderThan, someEquals, contains } = require('./parser')
 
 
 const now = new Date()
@@ -198,7 +198,45 @@ describe('Finder', () => {
             updated_at: nowISOMinus6Days
           }
         ]
-      }
+      }, {
+        packageVersionsFromGithub: [{
+          data: [
+            {
+              name: '1.16.1-pr146-85222ee',
+            }, {
+              name: '1.16.1',
+            }, {
+              name: '1.15.5-pr145-451ebc6',
+            }
+          ]
+        }, {
+          data: [
+            {
+              name: '1.15.5',
+            }, {
+              name: '1.15.4',
+            }, {
+              name: '1.15.3-pr146-451ebc6',
+            }
+          ]
+        }],
+        includeRules: [
+          new Operation({
+            type: 'name',
+            operator: contains,
+            value: '-pr146-',
+            operation: contains('-pr146-')
+          })
+        ],
+        excludeRules: [],
+        expected: [
+          {
+            name: '1.16.1-pr146-85222ee',
+          }, {
+            name: '1.15.3-pr146-451ebc6',
+          }
+        ]
+      },
     ])('Should select only wanted packageVersion', async ({ packageVersionsFromGithub, includeRules, excludeRules, expected }) => {
       const results = await finder(generateSequence(packageVersionsFromGithub), includeRules, excludeRules)
       expect(results).toEqual(expected)

@@ -7,8 +7,8 @@ const { cleaner } = require('../features/cleaner')
 
 const argv = yargs(hideBin(process.argv)).argv
 
-const { packageName, org, selector = '', excluder = '', dryRun = '1' } = argv
+const { packageName, org, selector = '', excluder = '', type = '', dryRun = '1' } = argv
 
 const octokit = new Octokit({ auth: argv.token })
 
-cleaner(octokit, packageName, org, selector.replace(/#/g, '\r\n'), excluder.replace(/#/g, '\r\n'), dryRun)
+cleaner(octokit, packageName, org, type, selector.replace(/#/g, '\r\n'), excluder.replace(/#/g, '\r\n'), dryRun)

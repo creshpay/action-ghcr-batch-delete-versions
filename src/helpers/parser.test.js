@@ -3,6 +3,86 @@ const Operation = require('./operation')
 
 describe('Parser', () => {
 
+  describe('#startsWith', () => {
+    test.each([
+      {
+        input: {
+          name: 'pr-12',
+          value: 'pr-',
+        },
+        expected: true
+      }, {
+        input: {
+          name: 'latest',
+          value: 'pr-',
+        },
+        expected: false
+      },
+    ])('Should test is $input.name startsWith $input.value ', ({ input, expected }) => {
+      expect(Parser.startsWith(input.value)(input.name)).toEqual(expected)
+    })
+  });
+
+  describe('#isEqual', () => {
+    test.each([
+      {
+        input: {
+          name: 'pr-12',
+          value: 'pr-12',
+        },
+        expected: true
+      }, {
+        input: {
+          name: 'latest',
+          value: 'pr-12',
+        },
+        expected: false
+      },
+    ])('Should test is $input.name equals $input.value ', ({ input, expected }) => {
+      expect(Parser.isEqual(input.value)(input.name)).toEqual(expected)
+    })
+  });
+
+  describe('#someEndsWith', () => {
+    test.each([
+      {
+        input: {
+          name: 'pr-12',
+          value: '-12',
+        },
+        expected: true
+      }, {
+        input: {
+          name: 'latest',
+          value: '-12',
+        },
+        expected: false
+      },
+    ])('Should test if $input.name ends with $input.value ', ({ input, expected }) => {
+      expect(Parser.endsWith(input.value)(input.name)).toEqual(expected)
+    })
+  });
+
+  describe('#someContains', () => {
+    test.each([
+      {
+        input: {
+          name: 'pr-12',
+          value: 'r-',
+        },
+        expected: true
+      }, {
+        input: {
+          name: 'latest',
+          value: 'pr-',
+        },
+        expected: false
+      },
+    ])('Should test if $input.name contains $input.value ', ({ input, expected }) => {
+      expect(Parser.contains(input.value)(input.name)).toEqual(expected)
+    })
+  });
+
   describe('#someStartsWith', () => {
     test.each([
       {
@@ -484,6 +564,46 @@ describe('Parser', () => {
           operator: Parser.youngerThan,
           value: '7d',
           operation: Parser.youngerThan('7d')
+        })
+      }, {
+        input: 'type=name;operator=startsWith;value=pr-1-',
+        expected: new Operation({
+          type: 'name',
+          operator: Parser.startsWith,
+          value: 'pr-1-',
+          operation: Parser.startsWith('pr-1-')
+        })
+      }, {
+        input: 'type=name;operator=isEqual;value=pr-1',
+        expected: new Operation({
+          type: 'name',
+          operator: Parser.isEqual,
+          value: 'pr-1',
+          operation: Parser.isEqual('pr-1')
+        })
+      }, {
+        input: 'type=name;operator=endsWith;value=-1',
+        expected: new Operation({
+          type: 'name',
+          operator: Parser.endsWith,
+          value: '-1',
+          operation: Parser.endsWith('-1')
+        })
+      }, {
+        input: 'type=name;operator=contains;value=-1',
+        expected: new Operation({
+          type: 'name',
+          operator: Parser.contains,
+          value: '-1',
+          operation: Parser.contains('-1')
+        })
+      }, {
+        input: 'type=name;value=pr-1',
+        expected: new Operation({
+          type: 'name',
+          operator: Parser.isEqual,
+          value: 'pr-1',
+          operation: Parser.isEqual('-1')
         })
       }
     ])('Should successfully parse line $input', ({ input, expected }) => {

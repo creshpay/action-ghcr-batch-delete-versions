@@ -2,6 +2,8 @@
 /*
 
 # Explicit includes
+!.github/
+!.github/*
 !src/
 !src/*
 !.gitignore

@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/cresh-io/action-ghcr-batch-delete-versions/compare/v1.0.1...v1.1.0) (2022-01-28)
+
+
+### Features
+
+* add a way to batch delete npm package type ([#3](https://github.com/cresh-io/action-ghcr-batch-delete-versions/issues/3)) ([6ac2109](https://github.com/cresh-io/action-ghcr-batch-delete-versions/commit/6ac210981ae1d059a700d3c9e6504a7b62fcf7f8))
+
 ### [1.0.1](https://github.com/cresh-io/action-ghcr-batch-delete-versions/compare/v1.0.0...v1.0.1) (2021-11-15)
 
 

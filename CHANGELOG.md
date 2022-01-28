@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.1](https://github.com/cresh-io/action-ghcr-batch-delete-versions/compare/v1.1.0...v1.1.1) (2022-01-28)
+
+
+### Bug Fixes
+
+* change cli arguments ([82d9f00](https://github.com/cresh-io/action-ghcr-batch-delete-versions/commit/82d9f002bb52f8c2361b7918e6f6688c12ea3b40))
+
 ## [1.1.0](https://github.com/cresh-io/action-ghcr-batch-delete-versions/compare/v1.0.1...v1.1.0) (2022-01-28)
 
 

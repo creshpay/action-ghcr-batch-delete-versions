@@ -1,5 +1,6 @@
 const { finder } = require('../helpers/finder')
 const { parseRulesFromString } = require('../helpers/parser')
+const { retry } = require('../helpers/retry')
 
 const cleaner = async (octokit, packageName, org, type, selector, excluder, dryRun) => {
     const includeRules = parseRulesFromString(selector)
@@ -7,10 +8,11 @@ const cleaner = async (octokit, packageName, org, type, selector, excluder, dryR
 
     const packages = await finder(packageVersionIterator(octokit, type, packageName, org), includeRules, excludeRules)
 
+    console.log(`${packages.length} packages found will be deleted`)
     if (+dryRun === 0) {
-        packages.map(deletePackageVersion.bind(null, octokit, packageName, org, type))
+        const promises = packages.map(deletePackageVersion.bind(null, octokit, packageName, org, type))
+        await Promise.all(promises)
     } else {
-        console.log(`${packages.length} packages found`)
         console.log(JSON.stringify(packages, null, 2))
     }
 }
@@ -24,12 +26,16 @@ const packageVersionIterator = (github, packageType, packageName, org) => {
 }
 
 const deletePackageVersion = async (github, repo, org, type, package) => {
-    await github.rest.packages.deletePackageVersionForOrg({
-        package_type: type,
-        package_name: repo,
-        org: org,
-        package_version_id: package.id,
-    })
+    await retry(
+        () => github.rest.packages.deletePackageVersionForOrg(
+            {
+                package_type: type,
+                package_name: repo,
+                org: org,
+                package_version_id: package.id,
+            },
+        ),
+    )
 }
 
 module.exports =

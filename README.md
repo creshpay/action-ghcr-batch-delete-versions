@@ -204,6 +204,10 @@ Arguments :
 - token: Github Token
 - dryRun: dry run option (default is 1)
 
+## Contributing
+
+See [guidelines](CONTRIBUTING)
+
 ## License
 
 The scripts and documentation in this project are released under the [MIT License](LICENSE)

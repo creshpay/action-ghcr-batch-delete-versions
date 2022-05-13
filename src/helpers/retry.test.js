@@ -20,7 +20,7 @@ describe('Retryer', () => {
                     resolve('success')
                 }
                 counter++
-                reject('error')
+                reject(new Error('error'))
             })
             // Act
             const res = await retry(p)
@@ -37,7 +37,7 @@ describe('Retryer', () => {
                     resolve('success')
                 }
                 counter++
-                reject('error')
+                reject(new Error('error'))
             })
             // Act
             const res = await retry(p, 10)
@@ -54,10 +54,10 @@ describe('Retryer', () => {
                     resolve('success')
                 }
                 counter++
-                reject('error')
+                reject(new Error('error'))
             })
             // Act and Assert
-            await expect(retry(p)).rejects.toEqual('error')
+            await expect(retry(p)).rejects.toEqual(new Error('error'))
         }, 15000)
     })
 })

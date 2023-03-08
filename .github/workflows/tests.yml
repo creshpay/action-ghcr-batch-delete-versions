@@ -14,7 +14,7 @@ jobs:
     if: "!github.event.pull_request.draft"
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Pull LFS
         uses: cresh-io/action-cached-git-lfs-pull@v1

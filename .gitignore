@@ -7,6 +7,7 @@
 !src/
 !src/*
 !.gitignore
+!.versionrc.json
 !action.yml
 !CHANGELOG.md
 !LICENSE

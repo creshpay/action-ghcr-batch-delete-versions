@@ -44,7 +44,7 @@ runs:
   using: "composite"
   steps:
     - name: Clean GHCR images
-      uses: actions/github-script@v5
+      uses: actions/github-script@v6
       env:
         ORG: "${{ inputs.org }}"
         DRY_RUN: "${{ inputs.dry-run }}"

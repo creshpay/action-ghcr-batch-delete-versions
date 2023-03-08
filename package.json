@@ -1,6 +1,6 @@
 {
   "name": "action-ghcr-batch-delete-versions",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "This action can delete batch of ghcr package versions",
   "main": "index.js",
   "scripts": {

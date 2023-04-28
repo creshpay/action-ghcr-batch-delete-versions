@@ -26,6 +26,6 @@
   },
   "dependencies": {
     "octokit": "^2.0.14",
-    "yargs": "^17.7.1"
+    "yargs": "^17.7.2"
   }
 }
